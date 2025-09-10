@@ -10846,4 +10846,8 @@ html {
   background-repeat: no-repeat;
   min-height: 15rem;
 }
-.navbar-brand img { width: 275px; }
+.navbar-brand img {
+  width: 100%;          /* scales down with container */
+  max-width: 275px;     /* keeps desktop size cap */
+  height: auto;
+}
