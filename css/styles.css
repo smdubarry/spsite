@@ -10846,23 +10846,4 @@ html {
   background-repeat: no-repeat;
   min-height: 15rem;
 }
-.navbar {
-  flex-wrap: nowrap;
-}
-
-.navbar-brand {
-  flex: 1 1 auto;       /* allow shrinking */
-  text-align: center;
-  min-width: 0;
-}
-
-.navbar-brand img {
-  width: 100%;          /* scales down with container */
-  max-width: 275px;     /* keeps desktop size cap */
-  height: auto;
-}
-
-.navbar-toggler {
-  flex-shrink: 0;       /* toggle never shrinks */
-  margin-left: auto;
-}
+.navbar-brand img { width: 275px; }
