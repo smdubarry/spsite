@@ -10847,5 +10847,6 @@ html {
   min-height: 15rem;
 }
 .navbar-brand img {
-  width: 275px;
+  width: 70vw;
+  max-width: 275px;
 }
