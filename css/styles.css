@@ -10847,7 +10847,5 @@ html {
   min-height: 15rem;
 }
 .navbar-brand img {
-  width: 70%;          /* scales down with container */
-  max-width: 275px;     /* keeps desktop size cap */
-  height: auto;
+  width: 275px;
 }
