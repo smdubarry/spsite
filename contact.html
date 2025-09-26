@@ -27,7 +27,7 @@
                             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
                             <li class="nav-item"><a class="nav-link" href="articles.html">Articles</a></li>
-                            <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a class="btn btn-primary calendly-link" href="#" data-calendly-url="https://calendly.com/stewardshippartners/intro">Book Intro Call</a></li>
+                            <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a class="btn btn-primary" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/stewardshippartners/intro'});return false;">Book Intro Call</a></li>
                         </ul>
                     </div>
                 </div>
@@ -138,6 +138,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
