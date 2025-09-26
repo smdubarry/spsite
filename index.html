@@ -257,12 +257,12 @@
                                 beginAtZero: true,
                                 ticks: {
                                     callback: (value) => `${(value * 100).toFixed(0)}%`,
-                                    font: { size: 12 }
+                                    font: { size: 14 }
                                 }
                             },
                             y: {
                                 ticks: {
-                                    font: { size: 12 }
+                                    font: { size: 14 }
                                 }
                             }
                         },
@@ -271,16 +271,7 @@
                             legend: {
                                 position: 'top',
                                 labels: {
-                                    font: { size: 12 }
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: (context) => {
-                                        const value = context.parsed.x ?? context.parsed.y;
-                                        const percentage = (value * 100).toFixed(2);
-                                        return `${context.dataset.label}: ${percentage}%`;
-                                    }
+                                    font: { size: 14 }
                                 }
                             },
                             datalabels: {
@@ -288,7 +279,7 @@
                                 formatter: (value) => `${(value * 100).toFixed(2)}%`,
                                 font: {
                                     weight: 'bold',
-                                    size: 11
+                                    size: 14
                                 }
                             }
                         }
