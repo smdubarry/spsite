@@ -233,38 +233,29 @@
                 ]);
 
                 const view = new google.visualization.DataView(data);
-
-                const isMobile =
-                    container.offsetWidth <= 575 ||
-                    window.matchMedia('(max-width: 575.98px)').matches;
-
-                if (isMobile) {
-                    view.setColumns([0, 1, 2]);
-                } else {
-                    view.setColumns([
-                        0,
-                        1,
-                        {
-                            calc: 'stringify',
-                            sourceColumn: 1,
-                            type: 'string',
-                            role: 'annotation'
-                        },
-                        2,
-                        {
-                            calc: 'stringify',
-                            sourceColumn: 2,
-                            type: 'string',
-                            role: 'annotation'
-                        }
-                    ]);
-                }
+                view.setColumns([
+                    0,
+                    1,
+                    {
+                        calc: 'stringify',
+                        sourceColumn: 1,
+                        type: 'string',
+                        role: 'annotation'
+                    },
+                    2,
+                    {
+                        calc: 'stringify',
+                        sourceColumn: 2,
+                        type: 'string',
+                        role: 'annotation'
+                    }
+                ]);
 
                 const formatter = new google.visualization.NumberFormat({ pattern: '0.00%' });
                 formatter.format(data, 1);
                 formatter.format(data, 2);
 
-                const baseOptions = {
+                const options = {
                     colors: ['#1b408f', '#db1212'],
                     legend: { position: 'top' },
                     backgroundColor: 'transparent',
@@ -280,18 +271,7 @@
                 };
 
                 const chart = new google.visualization.BarChart(container);
-                if (isMobile) {
-                    baseOptions.legend.position = 'bottom';
-                    baseOptions.chartArea = {
-                        height: '75%',
-                        width: '100%',
-                        left: 110,
-                        right: 16
-                    };
-                    baseOptions.vAxis.textStyle = { fontSize: 10 };
-                }
-
-                chart.draw(view, baseOptions);
+                chart.draw(view, options);
             }
 
             window.addEventListener('resize', drawPerformanceChart);
