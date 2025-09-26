@@ -278,7 +278,25 @@
                                 enabled: false
                             },
                             datalabels: {
-                                color: '#fff',
+                                // put the label right past the bar end
+                                anchor: ctx => {
+                                  const v = ctx.dataset.data[ctx.dataIndex];
+                                  return v >= 0 ? 'end' : 'start';
+                                },
+                                align: ctx => {
+                                  const v = ctx.dataset.data[ctx.dataIndex];
+                                  return v >= 0 ? 'end' : 'start';
+                                },
+                                offset: 8,
+                                // label text uses the bar color
+                                color: ctx => {
+                                  const bg = ctx.dataset.backgroundColor;
+                                  if (typeof bg === 'function') return bg(ctx);
+                                  return Array.isArray(bg) ? bg[ctx.dataIndex] : bg;
+                                },
+                                // keep drawing even if near edges
+                                clip: false,
+                                clamp: true,
                                 formatter: (value) => `${(value * 100).toFixed(2)}%`,
                                 font: {
                                     weight: 'bold',
