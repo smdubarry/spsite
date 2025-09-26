@@ -278,10 +278,12 @@
                                 enabled: false
                             },
                             datalabels: {
-                                anchor: 'right',
-                                align: 'right',
+                                anchor: ctx => (ctx.raw >= 0 ? 'end' : 'start'),
+                                align:  ctx => (ctx.raw >= 0 ? 'left' : 'right'),
                                 color: '#fff',
+                                offset: 6,
                                 formatter: (value) => `${(value * 100).toFixed(2)}%`,
+                                clamp: true,
                                 font: {
                                     size: 14
                                 }
