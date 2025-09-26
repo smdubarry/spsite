@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="bg-white rounded-3 shadow-sm p-3">
-                                <div id="performance-chart" style="min-height: 340px"></div>
+                                <canvas id="performance-chart" style="min-height: 340px"></canvas>
                             </div>
                         </div>
                     </div>
@@ -211,71 +211,92 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script>
-            google.charts.load('current', { packages: ['corechart', 'bar'] });
-            google.charts.setOnLoadCallback(drawPerformanceChart);
-
-            function drawPerformanceChart() {
-                const container = document.getElementById('performance-chart');
-                if (!container) {
+            document.addEventListener('DOMContentLoaded', function () {
+                const canvas = document.getElementById('performance-chart');
+                if (!canvas) {
                     return;
                 }
 
-                const data = google.visualization.arrayToDataTable([
-                    ['Time period', 'Global Multifactor (net)', 'Global equities benchmark'],
-                    ['Last 12 months', 0.2732, 0.163],
-                    ['2 years\nannualized', 0.2349, 0.1745],
-                    ['4 years\nannualized', 0.1315, 0.0775],
-                    ['5 years\nannualized', 0.2151, 0.1373],
-                    ['10 years\nannualized', 0.0908, 0.1001]
-                ]);
+                Chart.register(ChartDataLabels);
 
-                const view = new google.visualization.DataView(data);
-                view.setColumns([
-                    0,
-                    1,
-                    {
-                        calc: 'stringify',
-                        sourceColumn: 1,
-                        type: 'string',
-                        role: 'annotation'
-                    },
-                    2,
-                    {
-                        calc: 'stringify',
-                        sourceColumn: 2,
-                        type: 'string',
-                        role: 'annotation'
-                    }
-                ]);
-
-                const formatter = new google.visualization.NumberFormat({ pattern: '0.00%' });
-                formatter.format(data, 1);
-                formatter.format(data, 2);
-
-                const options = {
-                    colors: ['#1b408f', '#db1212'],
-                    legend: { position: 'top' },
-                    backgroundColor: 'transparent',
-                    height: 400,
-                    chartArea: { height: '80%', width: '70%' },
-                    hAxis: {
-                        format: '#%',
-                        textStyle: { fontSize: 12 }
-                    },
-                    vAxis: {
-                        textStyle: { fontSize: 12 }
-                    }
+                const chartData = {
+                    labels: [
+                        'Last 12 months',
+                        '2 years\nannualized',
+                        '4 years\nannualized',
+                        '5 years\nannualized',
+                        '10 years\nannualized'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Global Multifactor (net)',
+                            data: [0.2732, 0.2349, 0.1315, 0.2151, 0.0908],
+                            backgroundColor: '#1b408f'
+                        },
+                        {
+                            label: 'Global equities benchmark',
+                            data: [0.163, 0.1745, 0.0775, 0.1373, 0.1001],
+                            backgroundColor: '#db1212'
+                        }
+                    ]
                 };
 
-                const chart = new google.visualization.BarChart(container);
-                chart.draw(view, options);
-            }
-
-            window.addEventListener('resize', drawPerformanceChart);
+                new Chart(canvas, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: (value) => `${(value * 100).toFixed(0)}%`,
+                                    font: { size: 12 }
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 12 }
+                                }
+                            }
+                        },
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: { size: 12 }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => {
+                                        const value = context.parsed.x ?? context.parsed.y;
+                                        const percentage = (value * 100).toFixed(2);
+                                        return `${context.dataset.label}: ${percentage}%`;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                anchor: 'center',
+                                align: 'center',
+                                color: '#fff',
+                                formatter: (value) => `${(value * 100).toFixed(2)}%`,
+                                font: {
+                                    weight: 'bold',
+                                    size: 11
+                                }
+                            }
+                        }
+                    }
+                });
+            });
         </script>
     </body>
 </html>
