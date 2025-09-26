@@ -227,10 +227,10 @@
                 const chartData = {
                     labels: [
                         'Last 12 months',
-                        '2 years\nannualized',
-                        '4 years\nannualized',
-                        '5 years\nannualized',
-                        '10 years\nannualized'
+                        ['2 years', 'annualized'],
+                        ['4 years', 'annualized'],
+                        ['5 years', 'annualized'],
+                        ['10 years', 'annualized']
                     ],
                     datasets: [
                         {
@@ -276,7 +276,7 @@
                             },
                             tooltip: {
                                 enabled: false
-                            }
+                            },
                             datalabels: {
                                 color: '#fff',
                                 formatter: (value) => `${(value * 100).toFixed(2)}%`,
