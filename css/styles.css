@@ -10865,3 +10865,20 @@ html {
   width: 150px;
   height: 150px;
 }
+
+.information-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12pt;
+}
+
+.information-table th,
+.information-table td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.information-table th {
+  font-weight: 400;
+}
