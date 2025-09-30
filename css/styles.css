@@ -10870,6 +10870,8 @@ html {
   border-collapse: collapse;
   width: auto;
   font-size: 12pt;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .information-table th,
